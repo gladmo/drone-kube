@@ -1,0 +1,37 @@
+kind: pipeline
+type: kubernetes
+name: linux-amd64
+
+metadata:
+  namespace: ci-cd
+
+clone:
+  depth: 1
+
+trigger:
+  event:
+    - tag
+
+steps:
+- name: test
+  image: golang:1.15.5
+  commands:
+    - go test ./...
+
+- name: publish
+  image: plugins/docker:19.03
+  volumes:
+    - name: docker-dind
+      path: /var/run
+  settings:
+    repo: gladmo/drone-kube
+    auto_tag: true
+    username:
+      from_secret: SECRET_DOCKER_HUB_USER
+    password:
+      from_secret: SECRET_DOCKER_HUB_PASS
+
+volumes:
+  - name: docker-dind
+    host:
+      path: /var/docker-dind-sock
