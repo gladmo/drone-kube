@@ -20,9 +20,6 @@ steps:
 
 - name: publish
   image: plugins/docker:19.03
-  volumes:
-    - name: docker-dind
-      path: /var/run
   settings:
     repo: gladmo/drone-kube
     auto_tag: true
@@ -30,8 +27,3 @@ steps:
       from_secret: SECRET_DOCKER_HUB_USER
     password:
       from_secret: SECRET_DOCKER_HUB_PASS
-
-volumes:
-  - name: docker-dind
-    host:
-      path: /var/docker-dind-sock
