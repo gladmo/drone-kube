@@ -82,7 +82,7 @@ var deliveryCmd = &cobra.Command{
 			}
 
 			var result resources.UpdateResult
-			switch config.Resource {
+			switch strings.ToLower(config.Resource) {
 			case "deploy", "deployment":
 				result, err = config.UpdateDeploymentImage()
 			case "cj", "cronjob":
