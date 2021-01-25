@@ -2,7 +2,7 @@
 drone-kube is drone k8s continuous delivery plugin.
 
 ## Usage
-deliver one
+deliver one resource
 ```yaml
 ...
 - name: delivery
@@ -16,7 +16,7 @@ deliver one
 ...
 ```
 
-deliver multiple
+deliver multiple resources
 ```yaml
 ...
 - name: delivery
